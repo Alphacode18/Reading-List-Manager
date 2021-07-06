@@ -27,6 +27,6 @@ const RootQuery = new GraphQLObjectType({
 });
 
 //Exporting the entire graph structure and setup to use as middleware.
-module.exports = new GraphQLSchema({
+export default new GraphQLSchema({
   query: RootQuery,
 });
