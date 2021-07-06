@@ -3,7 +3,7 @@
  */
 
 import express from 'express';
-import cors from 'cors';
+// import cors from 'cors';
 import { graphqlHTTP } from 'express-graphql';
 const _port = 3000 || process.env.PORT;
 
@@ -18,11 +18,12 @@ import schema from './schema/schema';
  */
 
 const app = express();
-app.use(cors);
+// app.use(cors);
 app.use(
   '/graphql',
   graphqlHTTP({
     schema,
+    graphiql: true,
   })
 );
 
@@ -30,6 +31,6 @@ app.use(
  * Application Initialization
  */
 
-app.listen(3000, () => {
+app.listen(_port, () => {
   console.log(`Server established on ${_port}`);
 });
