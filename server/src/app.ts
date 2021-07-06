@@ -7,10 +7,10 @@ const app = express();
 
 app.use(cors);
 app.use(
-  '/graphql',
-  graphqlHTTP({
-    //Add Config
-  })
+  '/graphql'
+  // graphqlHTTP({
+  //   //Add Config
+  // })
 );
 
 app.listen(3000, () => {
