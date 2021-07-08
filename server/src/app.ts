@@ -3,15 +3,18 @@
  */
 
 import express from 'express';
-// import cors from 'cors';
+import * as dotenv from 'dotenv';
 import { graphqlHTTP } from 'express-graphql';
 const _port = 3000 || process.env.PORT;
+
+dotenv.config();
 
 /*
  * Internal Imports
  */
 
 import schema from './schema/schema';
+import { connectDatabase } from './utils/database';
 
 /*
  * Application Setup
@@ -26,6 +29,8 @@ app.use(
     graphiql: true,
   })
 );
+
+connectDatabase();
 
 /*
  * Application Initialization
