@@ -5,7 +5,7 @@
 import express from 'express';
 import * as dotenv from 'dotenv';
 import { graphqlHTTP } from 'express-graphql';
-const _port = 3000 || process.env.PORT;
+const _port = 4000 || process.env.PORT;
 
 dotenv.config();
 
