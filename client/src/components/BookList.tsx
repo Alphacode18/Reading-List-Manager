@@ -1,16 +1,6 @@
 import React from 'react';
-import { gql } from 'apollo-boost'; //Gives Access To The Query Language
 import { graphql } from 'react-apollo'; //Helps Glue Query To Component
-
-//Query Created
-const getBooksQuery = gql`
-  {
-    books {
-      name
-      id
-    }
-  }
-`;
+import { getBooksQuery } from '../queries/queries';
 
 interface Book {
   name?: string;
