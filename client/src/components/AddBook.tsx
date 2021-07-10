@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
 import { graphql } from 'react-apollo';
-import { getAuthorsQuery } from '../queries/queries';
+import { flowRight as compose } from 'lodash';
+import { getAuthorsQuery, addBookMutation } from '../queries/queries';
 
 interface Author {
   name?: string;
@@ -10,22 +11,28 @@ interface Author {
 
 function AddBook(props: any) {
   const [name, setName] = useState<HTMLInputElement | null>();
-  const [genre, setGenre] = useState('');
-  const [author, setAuthor] = useState('');
+  const [genre, setGenre] = useState<HTMLInputElement | null>();
+  const [author, setAuthor] = useState<HTMLInputElement | null>();
 
   const handleSubmit = (event: React.FormEvent): void => {
     event.preventDefault();
-    console.log(name, genre, author);
+    props.addBookMutation({
+      variables: {
+        name: name,
+        genre: genre,
+        authorId: author,
+      },
+    });
   };
 
   const displayAuthors = () => {
-    const { authors, loading } = props.data;
+    const { authors, loading } = props.getAuthorsQuery;
     return loading ? (
       <option disabled>Loading Authors...</option>
     ) : (
       authors.map((author: Author) => {
         return (
-          <option value={author.name} key={author.id}>
+          <option value={author.id} key={author.id}>
             {author.name}
           </option>
         );
@@ -68,4 +75,7 @@ function AddBook(props: any) {
   );
 }
 
-export default graphql(getAuthorsQuery)(AddBook);
+export default compose(
+  graphql(getAuthorsQuery, { name: 'getAuthorsQuery' }),
+  graphql(addBookMutation, { name: 'addBookMutation' })
+)(AddBook);
