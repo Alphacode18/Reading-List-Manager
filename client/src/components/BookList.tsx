@@ -9,10 +9,6 @@ interface Book {
   id: string;
 }
 
-interface BookListProps {
-  books: Book[];
-}
-
 function BookList(props: any) {
   const [active, setActive] = React.useState<string | null>(null);
   const displayBooks = () => {

@@ -2,12 +2,6 @@ import React from 'react';
 import { graphql } from 'react-apollo'; //Helps Glue Query To Component
 import { getBook } from '../queries/queries';
 
-interface Book {
-  name?: string;
-  genre?: string;
-  id?: string;
-}
-
 interface BookDetailsProp {
   bookId: string | null;
   data?: any;
